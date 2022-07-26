@@ -1,7 +1,7 @@
 /*
 GAME FUNCTION
 - Player must guess a number between a min and max
-- Players get a certain amount remaining
+- Player get a certain amount remaining
 - Notify player of numbers of guesses left
 - Notify the player of the correct answer if loose
 - Let player choose to play again
@@ -41,9 +41,31 @@ guessBtnEl.addEventListener("click", () => {
     guessInputEl.disabled = true;
     //change border color to green
     guessInputEl.style.borderColor = "green";
+    //Game over - won
     //win case
-    setMessage(`${winningNumber} is correct, YOU WIN!!`, "green");
+    setMessage(`YOU WIN!! ${winningNumber} is the winning number.`, "green");
   } else {
+    //wrong number
+    guessLeft -= 1;
+
+    if (guessLeft === 0) {
+      //Game over - lost
+      //Disable input
+      guessInputEl.disabled = true;
+      // show msg
+      setMessage(`Game Over,You Lost! The winning number is ${winningNumber}`, "red");
+    } else {
+      //Game continues answer wrong
+
+      //change border color to red
+      guessInputEl.style.borderColor = "red";
+
+      //clear Input
+      guessInputEl.value = "";
+
+      //Tell user it's the wrong number
+      setMessage(`${guess} is not correct! ${guessLeft} guess left`, "red");
+    }
   }
 });
 
