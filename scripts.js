@@ -37,23 +37,16 @@ guessBtnEl.addEventListener("click", () => {
 
   //check if won
   if (guess === winningNumber) {
-    //Disable input
-    guessInputEl.disabled = true;
-    //change border color to green
-    guessInputEl.style.borderColor = "green";
-    //Game over - won
-    //win case
-    setMessage(`YOU WIN!! ${winningNumber} is the winning number.`, "green");
+    //Game over - Win
+    gameOver(true, `YOU WIN!! ${winningNumber} is the winning number.`, "green");
   } else {
     //wrong number
     guessLeft -= 1;
 
     if (guessLeft === 0) {
-      //Game over - lost
-      //Disable input
-      guessInputEl.disabled = true;
-      // show msg
-      setMessage(`Game Over,You Lost! The winning number is ${winningNumber}`, "red");
+      //Game Over - Lost
+
+      gameOver(false, `Game Over,You Lost! The winning number was ${winningNumber}`, "red");
     } else {
       //Game continues answer wrong
 
@@ -69,6 +62,20 @@ guessBtnEl.addEventListener("click", () => {
   }
 });
 
+//Game over
+const gameOver = (won, msg) => {
+  let color;
+  won === true ? (color = "green") : (color = "red");
+  //Disable input
+  guessInputEl.disabled = true;
+  //change border color to green
+  guessInputEl.style.borderColor = color;
+  //set text color
+  message.style.color = color;
+  setMessage(msg);
+};
+
+//set massage
 const setMessage = (msg, color) => {
   message.style.color = color;
   message.textContent = msg;
