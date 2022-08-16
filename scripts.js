@@ -10,7 +10,7 @@ GAME FUNCTION
 //Game values
 let min = 1;
 let max = 10;
-let winningNumber = 2;
+let winningNumber = getRandoNumber(min, max);
 let guessLeft = 3;
 
 //UI Elements
@@ -90,3 +90,8 @@ const setMessage = (msg, color) => {
   message.style.color = color;
   message.textContent = msg;
 };
+
+// get winning number
+function getRandoNumber(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
