@@ -25,10 +25,16 @@ const message = document.querySelector(".message");
 minNumEl.textContent = min;
 maxNumEl.textContent = max;
 
+//Play again eventListener
+gameEl.addEventListener("mousedown", function (e) {
+  if (e.target.className === "play-again") {
+    window.location.reload();
+  }
+});
+
 //create EventListener on Button
 guessBtnEl.addEventListener("click", () => {
   let guess = parseInt(guessInputEl.value);
-  // console.log(guess);
 
   //Validate
   if (isNaN(guess) || guess < min || guess > max) {
@@ -72,7 +78,11 @@ const gameOver = (won, msg) => {
   guessInputEl.style.borderColor = color;
   //set text color
   message.style.color = color;
-  setMessage(msg);
+  setMessage(msg, color);
+
+  //Play Again
+  guessBtnEl.value = "Play Again";
+  guessBtnEl.classList.add("play-again");
 };
 
 //set massage
